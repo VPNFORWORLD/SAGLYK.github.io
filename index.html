@@ -1,25 +1,786 @@
-<!DOCTYPE html>
- <html>
-   <head>
-   	<meta charset="utf-8">
-    <title>Saglyk</title>
-    <link rel="stylesheet" type="text/css" href="index.css">
-     
-   </head>
-   
-   <body>
-   	
-      <h1>
-       <p>
-       <a href="TM/index.html" style="color: rgb(50 50 50);"> TM </a><p>
-       <a href="RU/index.html" style="color: rgb(50 50 50);"> RU </a><p>
-       <a href="EN/index.html" style="color: rgb(50 50 50);"> EN </a>
-       
-      <h1>
+<!doctype html>
+
+<html>
+
+<head>
+
+    <meta charset="utf8">
+
+    <link rel="icon" href="favicon.ico">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Startpage</title>
+
+    <style>
+
+        :root {
+
+            --main-bg-color: #272d36;
+
+            /*
+
+            * uncomment next line and set image url
+
+            --main-bg-image: url('');
+
+            */
+
+            --main-accent-color: #C96070;
+
+            --main-color: rgb(102, 102, 107);
+
+            --main-text-color: #f0f0f0;
+
+            --white: #ffffff;
+
+            --main-focus-color: #1d2125;
+
+        }
+
+        body, html {
+
+            height: 100%;
+
+            width:100%;
+
+        }
+
+        body {
+
+            font-family: "Times New Roman", Times, serif;
+
+            font-size: 1.4em;
+
+            background-image: var(--main-bg-image);
+
+            background-color: var(--main-bg-color);
+
+            background-size: cover;
+
+            background-position: center;
+
+            box-sizing: border-box;
+
+            margin: 0;
+
+            position: relative;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            -webkit-user-select: none;
+
+            -moz-user-select: none;
+
+            user-select: none;
+
+        }
+
+        ul {
+
+            list-style: none;
+
+            padding: 0;
+
+            margin: 0;
+
+            display: flex;
+
+            flex-flow: row wrap;
+
+            max-width: 320px;
+
+            text-align: center;
+
+        }
+
+        li {
+
+            flex-grow: 1;
+
+            display: flex;
+
+            justify-content: center;
+
+            padding: 8px 6px;
+
+        }
+
+        a {
+
+            color: var(--main-text-color);
+
+            text-decoration: none;
+
+            outline: 0;
+
+            border: 0;
+
+            background: var(--main-color);
+
+            padding: 8px;
+
+            border-radius: 3px;
+
+            box-shadow: 0 0 5px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+
+        }
+
+        a:hover, a:focus {
+
+            background: var(--main-accent-color);
+
+            box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+
+        }
+
+        span {
+
+             position: relative;
+
+             margin: 8px 0;
+
+        }
+
+        .btnAdd {
+
+            position: fixed;
+
+            width: 54px;
+
+            height: 54px;
+
+            border-radius: 54px;
+
+            box-shadow: 0 0 0 6px var(--main-color);
+
+            background: var(--main-bg-color);
+
+            border: 0;
+
+            right: 24px;
+
+            bottom: 24px;
+
+            z-index: 9999;
+
+            cursor: pointer;
+
+            text-align: center;
+
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+
+            -webkit-touch-callout: none;
+
+        }
+
+		.btnBackup {            position: fixed;
+
+            width: 54px;
+
+            height: 54px;
+
+            border-radius: 54px;
+
+            box-shadow: 0 0 0 6px var(--main-color);
+
+            background: var(--main-bg-color);
+
+			fill: yellow;
+
+            border: 0;
+
+            right: 100px;
+
+            bottom: 24px;
+
+            z-index: 9999;
+
+            cursor: pointer;
+
+            text-align: center;
+
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+
+            -webkit-touch-callout: none;
+
+        }
+
+		
+
+		button svg{
+
+			fill: var(--white);
+
+            opacity: .6;
+
+		}
+
+		
+
+        .btnAdd svg {
+
+            width: 18px;
+
+            height: 18px;
+
+            margin-top: 2px;
+
+        }
+
+        .btnAdd:active {
+
+            background: var(--main-focus-color);
+
+        }
+
+        .btnAdd:focus {
+
+            box-shadow: 0 0 0 6px var(--main-accent-color);
+
+        }
+
+        .active {
+
+            box-shadow: 0 0 0 6px var(--main-accent-color);
+
+            background: var(--main-focus-color);
+
+        }
+
+        .hide {
+
+            display: none;
+
+        }
+
+        button {
+
+            cursor: pointer;
+
+            margin-right: 3px;
+
+        }
+
+        button::-moz-focus-inner {
+
+            border: 0;
+
+        }
+
+        button, input {
+
+            outline: 0;
+
+            border: 0;
+
+            padding: 0;
+
+            margin: 0;
+
+        }
+
+        .remove {
+
+            color: var(--main-bg-color);
+
+            background: var(--white);
+
+            width: 21px;
+
+            height: 21px;
+
+            border-radius: 21px;
+
+            border-bottom-left-radius: 0;
+
+            font-size: 9px;
+
+            position: absolute;
+
+            right: -14px;
+
+            top: -20px;
+
+        }
+
+        .remove:hover, .remove:focus {
+
+            color: var(--white);
+
+            background: var(--main-accent-color);
+
+        }
+
+        #panel {
+
+            min-width: 100%;
+
+            position: fixed;
+
+            top: 0;
+
+            background: var(--main-focus-color);
+
+            padding: 2px;
+
+        }
+
+        form {
+
+            padding: 0;
+
+            width: 100%;
+
+            display: flex;
+
+            -webkit-flex-flow: column wrap;
+
+	        flex-flow: column wrap;
+
+        }
+
+        @media only screen and (min-width: 480px) {
+
+            form {
+
+                width: none;
+
+                -webkit-flex-flow: row wrap;
+
+	            flex-flow: row wrap;
+
+            }
+
+            button {
+
+                width: 56px;   
+
+                margin-right: 2px;
+
+            }
+
+            input {
+
+                flex: 1 auto;
+
+                margin-right: 2px;
+
+            }
+
+        }
+
+        input {
+
+            height: 48px;
+
+        }
+
+        form button {
+
+            min-height: 48px;
+
+        }
+
+        #panel button {
+
+            background: var(--white);
+
+            color: var(--white);
+
+        }
+
+        #panel button:focus {
+
+            border: 1px solid var(--white);
+
+        }
+
+        #panel input {
+
+            padding-left: 8px;
+
+            color: var(--white);
+
+            background: var(--main-bg-color);
+
+            box-shadow: none;
+
+            border-bottom: 2px solid white;
+
+        }
+
+        #panel input:focus {
+
+            border-color: var(--main-accent-color);
+
+        }
+
+        #panel input:valid ~ button {
+
+            background: var(--main-accent-color);
+
+        }
+
+        #panel input:valid {
+
+            border-color: var(--main-accent-color);
+
+        }
+
+        #panel input:invalid ~ button {
+
+            color: var(--main-bg-color);
+
+            background: var(--main-color);
+
+        }
+
+        /*remove datalist arrow in webkit*/
+
+        input::-webkit-calendar-picker-indicator {
+
+            display: none;
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <base target="_blank"><!-- opens all links in a new window -->
+
+    <div id="links"></div>
+
+    <button aria-pressed="false" class="btnAdd" id="btnToggle" title="Toggle form to add link">
+
+        <svg id="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26.6 26.6">
+
+            <path d="M21.2.3L2.8 18.7l5.1 5.1L26.3 5.4c.4-.4.4-1 0-1.4L22.6.3c-.4-.4-1-.4-1.4 0zM1.3 26.5l4.8-1.3-4.8-4.8L0 25.2c-.2 1 .4 1.5 1.3 1.3z"/>
+
+        </svg>
+
+    </button>
+
+	<button aria-pressed="false" class="btnBackup" title="Backup links" id="backupLinks">
+
+		<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 512 512">
+
+			<path d="M127.734 111.299l93.399-1.014v87.624h60.519v-148.121h-30.259l-183.306 0.4z" />
+
+			<path d="M137.81 194.908h227.195l-111.975 121.815z"/>
+
+			<path d="M141.968 220.109h-107.1v242.114h442.276v-242.114h-112.22l-42.219 47.309h130.765l-23.623-23.665v194.795l23.623-23.644h-394.937l23.634 23.644v-194.796l-23.634 23.664h126.515z"/>
+
+		</svg>
+
+	</button>
+
+    <div class="hide" id="panel">
+
+        <form name="submitform" onsubmit="return false">
+
+            <input id="urlLabel" list="defaultLabels" type="text" name="label" placeholder="label" title="Input label" required>
+
+            <datalist id="defaultLabels">
+
+                <option value="Startpagex">
+
+                <option value="DuckDuckGo">
+
+                <option value="Hacker News">
+
+                <option value="/.">
+
+                <option value="Wikipedia">
+
+                <option value="Reddit">
+
+                <option value="/tech/">
+
+            </datalist>
+
+            <input id="urlInput" list="defaultURLs" type="url" name="hostname" placeholder="link" title="Input link (URLs must start with https://)" required>
+
+            <datalist id="defaultURLs">
+
+                <option value="https://">
+
+                <option value="https://startpage.com/">
+
+                <option value="https://duckduckgo.com/">
+
+                <option value="https://news.ycombinator.com/">
+
+                <option value="https://slashdot.org/">
+
+                <option value="https://en.m.wikipedia.org/">
+
+                <option value="https://reddit.com/">
+
+                <option value="https://nerv.8ch.net/tech/cyber/g/sudo/prog/sci/">
+
+            </datalist>
+
+            <button type="submit" title="Add link" id="addUrl" formnovalidate>➜</button>
+
+		</form>
+
+    </div>
+
+    <script type="text/javascript">	
+
+		(function() {
+
+		
+
+            
+
+            var linkOptions = {
+
+                fetchLinks: function() {
+
+                    var links = new Array;
+
+                    var links_str = localStorage.getItem('link');
+
+                    if (links_str != null) {
+
+                        links = JSON.parse(links_str);
+
+                    }
+
+                    return links;
+
+                },
+
+                removeLink: function() {
+
+                    var id = this.getAttribute('id');
+
+                    var links = linkOptions.fetchLinks();
+
+                    links.splice(id, 1);
+
+                    localStorage.setItem('link', JSON.stringify(links));
+
+                    linkOptions.showLinks();
+
+                    return false;
+
+                },
+
+                showLinks: function() {
+
+                    var links = linkOptions.fetchLinks();
+
+                    var html = '<ul>';
+
+                    for (var i=0; i<links.length; i++) {
+
+                        html += '<li><span class="link"><a href="' + links[i].url + '">' + links[i].label + '</a><button title="Remove" class="remove" id="' + i + '">✖</button></span></li>';
+
+                    };
+
+                    html += '</ul>';
+
+                    document.getElementById('links').innerHTML = html;
+
+                    var buttons = document.getElementsByClassName('remove');
+
+                    for (var i=0; i<buttons.length; i++) {
+
+                        buttons[i].addEventListener('click', linkOptions.removeLink);
+
+                    };
+
+                },
+
+                addLink: function() {
+
+                    var linkNew = document.getElementById('urlInput').value;
+
+                    var labelNew = document.getElementById('urlLabel').value;
+
+                    var newLink = { "url": linkNew, "label": labelNew };
+
+                    var links = linkOptions.fetchLinks();
+
+                    if (linkNew == "" || labelNew == "") {
+
+                        return false;
+
+                    } else {
+
+                        links.push(newLink);
+
+                        localStorage.setItem('link', JSON.stringify(links));
+
+                        linkOptions.showLinks();
+
+                        document.getElementById('urlInput').value = ""
+
+                        document.getElementById('urlLabel').value = ""
+
+                    }
+
+                }
+
+            };
+
+            document.getElementById('addUrl').addEventListener('click', linkOptions.addLink);
+
+            linkOptions.showLinks();
+
+            var toggleMenu = {
+
+                btnToggle: document.getElementById('btnToggle'),
+
+                menu: document.getElementById('panel'),
+
+                btnIcon: document.getElementById('icon'),
+
+                btnClose: document.getElementsByClassName('remove'),
+
+                btnClick: function() {
+
+                    toggleMenu.btnToggle.addEventListener('click', function() {
+
+                        toggleMenu.menu.classList.toggle('hide');
+
+                        toggleMenu.btnToggle.classList.toggle('active');
+
+                        for (i=0; i<toggleMenu.btnClose.length; i++) {
+
+                            if (toggleMenu.btnClose[i].style.display == "none") {
+
+                                toggleMenu.btnClose[i].style.display = "block";
+
+                                toggleMenu.btnIcon.style.opacity = "1";
+
+                            } else {
+
+                                toggleMenu.btnClose[i].style.display = "none";
+
+                                toggleMenu.btnIcon.style.opacity = "0.7";
+
+                            }
+
+                        };
+
+                    });
+
+                },
+
+                btnCloseVis: function() {
+
+                    for (i=0; i<toggleMenu.btnClose.length; i++) {
+
+                        if (toggleMenu.btnClose[i].style.display = "block") {
+
+                            toggleMenu.btnClose[i].style.display = "none";
+
+                        } else {
+
+                            toggleMenu.btnClose[i].style.display = "block";
+
+                        }
+
+                    };
+
+                }
+
+            };
+
+            toggleMenu.btnClick();
+
+            document.onload = toggleMenu.btnCloseVis();
+
+			
+
+				document.getElementById('backupLinks').onclick = function(){
+
+					var linkNew = document.getElementById('urlInput').value;
+
+                    var labelNew = document.getElementById('urlLabel').value;
+
+                    var newLink = { "url": linkNew, "label": labelNew };
+
+                    var links = linkOptions.fetchLinks();
+
+					
+
+					var textFileAsBlob = new Blob([JSON.stringify(links)], { type: 'application/json' });
+
+					var fileName = 'LocalStartPageLinks.json';
+
+					
+
+					if ('msSaveOrOpenBlob' in navigator) {
+
+						navigator.msSaveOrOpenBlob(textFileAsBlob, fileName);
+
+					} else {
+
+						var downloadLink = document.createElement('a');
+
+						downloadLink.download = fileName;
+
+						downloadLink.innerHTML = 'Download File';
+
+						if ('URL' in window) {
+
+							// Chrome allows the link to be clicked without actually adding it to the DOM.
+
+							downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+
+						} else {
+
+							// Firefox requires the link to be added to the DOM before it can be clicked.
+
+							downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+
+							downloadLink.onclick = destroyClickedElement;
+
+							downloadLink.style.display = 'none';
+
+							document.body.appendChild(downloadLink);
+
+						}
+
+					downloadLink.click();
+
+					}
+
+				}
+
+				
+
+        })();
+
+    </script>
+
+</body>
+
+</html>
+
+<!-- TODO:
+
+    [ ] svg icon for arrow
+
+    [ ] editable entries
+
+-->
 
 
 
     
   
-   </body>
-  </html>
+   
+  
